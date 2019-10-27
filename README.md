@@ -21,17 +21,17 @@ com.goclass-parent</br>
       -config             #配置</br>
       -utils              #工具</br>
   -com.goclass-web      #WebService</br>
-    #main/java目录下
+    #main/java目录下</br>
     -com.web</br>
       -GoClassApp.java  #App启动类</br> 
     -com.web.model      #WebService模块</br>
       -business           #业务</br>
-        -service            #服务接口层
-        -controller         #请求接收层
-      -global             #全局配置
+        -service            #服务接口层</br>
+        -controller         #请求接收层</br>
+      -global             #全局配置</br>
     ----------------------------------------------
-    #main/resources目录下
-    -application.yml    #配置文件
+    #main/resources目录下</br>
+    -application.yml    #配置文件</br>
     ----------------------------------------------
-    -pom.xml            #依赖
+    -pom.xml            #依赖</br>
 </pre>

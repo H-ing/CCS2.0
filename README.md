@@ -19,6 +19,7 @@ com.goclass-parent</br>
   -com.goclass-rpc      #rpc调用</br>
   -com.goclass-common   #公共模块</br>
       -config             #配置</br>
+      -entity             #实体</br>
       -utils              #工具</br>
   -com.goclass-web      #WebService</br>
     #main/java目录下</br>

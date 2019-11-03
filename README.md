@@ -15,7 +15,7 @@
 com.goclass-parent</br>
   -com.goclass-mapper   #orm映射文件</br>
   -com.goclass-pojo     #orm映射实体</br>
-  -com.goclass-security #权限控制</br>
+  -com.goclass-security #权限控制,<front color="red">已被移除</front></br> 
   -com.goclass-rpc      #rpc调用</br>
   -com.goclass-common   #公共模块</br>
       -config             #配置</br>
@@ -28,6 +28,7 @@ com.goclass-parent</br>
     -com.web.model      #WebService模块</br>
       -business           #业务</br>
         -service            #服务接口层</br>
+          -impl             #服务实现</br>
         -controller         #请求接收层</br>
       -global             #全局配置</br>
     ----------------------------------------------

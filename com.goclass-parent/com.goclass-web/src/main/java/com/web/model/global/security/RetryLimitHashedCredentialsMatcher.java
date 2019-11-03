@@ -1,0 +1,20 @@
+package com.web.model.global.security;
+
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.ExcessiveAttemptsException;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+
+public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher {
+
+
+	public RetryLimitHashedCredentialsMatcher() {
+	}
+
+	@Override
+	public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info)
+			throws ExcessiveAttemptsException {
+		super.doCredentialsMatch(token, info);
+		return true;
+	}
+}

@@ -1,0 +1,10 @@
+server:
+  port: 5050
+  servlet:
+    context-path: /goclass
+spring:
+  datasource:
+    url: jdbc:mysql://lede.dalaomai.cn:5006/goclass?useUnicode=true&characterEncoding=UTF-8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root

@@ -1,0 +1,11 @@
+D:\JavaProjects\com.goclass-parent\com.goclass-security\src\main\java\service\PermService.java
+D:\JavaProjects\com.goclass-parent\com.goclass-security\src\main\java\entity\NotLogin.java
+D:\JavaProjects\com.goclass-parent\com.goclass-security\src\main\java\dao\RoleDao.java
+D:\JavaProjects\com.goclass-parent\com.goclass-security\src\main\java\dao\UserDao.java
+D:\JavaProjects\com.goclass-parent\com.goclass-security\src\main\java\app\config\ShiroConfig.java
+D:\JavaProjects\com.goclass-parent\com.goclass-security\src\main\java\service\RoleService.java
+D:\JavaProjects\com.goclass-parent\com.goclass-security\src\main\java\app\realm\MyRealm.java
+D:\JavaProjects\com.goclass-parent\com.goclass-security\src\main\java\config\CORSAuthenticationFilter.java
+D:\JavaProjects\com.goclass-parent\com.goclass-security\src\main\java\app\entity\User.java
+D:\JavaProjects\com.goclass-parent\com.goclass-security\src\main\java\entity\Result.java
+D:\JavaProjects\com.goclass-parent\com.goclass-security\src\main\java\service\UserService.java

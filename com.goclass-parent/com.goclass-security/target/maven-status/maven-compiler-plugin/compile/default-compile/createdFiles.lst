@@ -1,0 +1,11 @@
+app\config\ShiroConfig.class
+config\CORSAuthenticationFilter.class
+service\PermService.class
+entity\Result.class
+app\entity\User.class
+service\UserService.class
+dao\UserDao.class
+app\realm\MyRealm.class
+service\RoleService.class
+dao\RoleDao.class
+entity\NotLogin.class

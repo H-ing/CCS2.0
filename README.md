@@ -15,7 +15,7 @@
 com.goclass-parent</br>
   -com.goclass-mapper   #orm映射文件</br>
   -com.goclass-pojo     #orm映射实体</br>
-  -com.goclass-security #权限控制,<front color="red">已被移除</front></br> 
+  -com.goclass-security #权限控制,<font color="red">已被移除</font></br> 
   -com.goclass-rpc      #rpc调用</br>
   -com.goclass-common   #公共模块</br>
       -config             #配置</br>

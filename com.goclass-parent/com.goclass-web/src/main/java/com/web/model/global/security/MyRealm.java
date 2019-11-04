@@ -3,6 +3,7 @@ package com.web.model.global.security;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -85,13 +86,20 @@ public class MyRealm extends AuthorizingRealm {
 		// 查询数据库获取该用户的权限信息
 		List<String> permiss = getPermiss(user.getUsername());
 		// 查询用户的角色信息
-		Role role = roleService.queryById(user.getRoleId());
+		 List<Role> roleList = roleService.queryAllById(user.getRoleId());
+		 List<String> roles = new ArrayList<>();
+		 for (Role role : roleList) {
+			roles.add(role.getRoleName());
+		}
 
 		// 组装授权信息 没有权限抛出:org.apache.shiro.authc.IncorrectCredentialsException
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 
 		// 添加角色
-		info.addRole(role.getRoleName());
+		info.addRoles(roles);
+		logger.info("用户：" + SecurityUtils.getSubject().getSession().getId()+ "，角色信息：" + roles.toString());
+		
+		
 		// 添加权限
 		info.addStringPermissions(permiss);
 

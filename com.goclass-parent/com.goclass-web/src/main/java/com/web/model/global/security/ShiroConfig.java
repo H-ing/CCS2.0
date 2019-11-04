@@ -59,6 +59,12 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/error/*", "anon");
 		filterChainDefinitionMap.put("/api/user/login", "anon");
 		filterChainDefinitionMap.put("/login", "anon");
+		
+		/**
+		 * 数据库监测系统权限
+		 */
+		filterChainDefinitionMap.put("/druid/**", "roles[db_admin]");
+		
 		filterChainDefinitionMap.put("/unauthent", "anon");
 		filterChainDefinitionMap.put("/swagger-ui.html", "anon");
 		filterChainDefinitionMap.put("/swagger-resources", "anon");

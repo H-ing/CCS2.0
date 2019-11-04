@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
 		LoginUser loginUser = new LoginUser();
 		loginUser.setLoginDate(new Date());
 		
-		Role role = roleService.queryById(user.getRoleId());
+		Role role = roleService.queryOneById(user.getRoleId());
 		loginUser.setRoleName(role.getRoleName());
 		loginUser.setStatus(user.getStatus());
 		loginUser.setUserId(user.getUserId());

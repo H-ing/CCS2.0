@@ -27,6 +27,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 	private static Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+	
+	/**
+	 * 错误页面根路径
+	 */
+	private static final String ERRO_RPATH = "/goclass/error";
  
 	/**
 	 * 
@@ -41,7 +46,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = AuthorizationException.class)
     public void unAuthorizationException(HttpServletRequest request, HttpServletResponse response) throws Exception {
     	logger.info("没有权限！");
-        response.sendRedirect("/error/e403");
+        response.sendRedirect(ERRO_RPATH + "/e403");
     }
     /**
      * 
@@ -56,7 +61,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = AuthenticationException.class)
     public void unAuthenticationException(HttpServletRequest request, HttpServletResponse response) throws Exception {
     	logger.info("认证失败！");
-    	response.sendRedirect("/error/e401");
+    	response.sendRedirect(ERRO_RPATH + "/e401");
     }
     
     /**
@@ -83,17 +88,19 @@ public class GlobalExceptionHandler {
             //获取statusCode:404,500
             Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
             if(statusCode == 500){
-            	response.sendRedirect("/error/e500");
+            	response.sendRedirect(getErrorPath() + "/e500");
             }else if(statusCode == 404){
-            	response.sendRedirect("/error/e404");
+            	response.sendRedirect(getErrorPath() + "/e404");
             }
         }
+        
         /**
-         * 设置默认的错误处理url
+         * 设置默认的错误处理路径
          */
-        @Override
-        public String getErrorPath() {
-            return "/error";
-        }
+		@Override
+		public String getErrorPath() {
+			// TODO Auto-generated method stub
+			return ERRO_RPATH;
+		}
     }
 }

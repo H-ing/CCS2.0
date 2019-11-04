@@ -15,7 +15,7 @@ import io.swagger.annotations.Api;
  */
 @RestController
 @RequestMapping("/error")
-@Api(description = "全局异常结果")
+@Api(tags = "全局异常结果")
 public class GlobalExceptionController {
 	
 	@RequestMapping(value = "/unauthent", method = RequestMethod.GET)

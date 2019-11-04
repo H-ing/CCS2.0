@@ -27,10 +27,12 @@ com.goclass-parent</br>
       -GoClassApp.java  #App启动类</br> 
     -com.web.model      #WebService模块</br>
       -business           #业务</br>
-        -service            #服务接口层</br>
-          -impl             #服务实现</br>
-        -controller         #请求接收层</br>
+        -service            #服务接口层,全部的服务接口都放在这里</br>
+          -impl             #服务实现，服务实现都放在这里</br>
+        -controller         #请求接收层，所有的controller都放在这里</br>
       -global             #全局配置</br>
+        -security           #权限安全配置</br>
+        -utils              #工具</br>
     ----------------------------------------------
     #main/resources目录下</br>
     -application.yml    #配置文件</br>

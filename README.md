@@ -17,10 +17,10 @@ com.goclass-parent</br>
   -com.goclass-pojo     #orm映射实体</br>
   -com.goclass-security #权限控制,<font color="red">已被移除</font></br> 
   -com.goclass-rpc      #rpc调用</br>
-  -com.goclass-common   #公共模块</br>
-      -config             #配置</br>
-      -entity             #实体</br>
-      -utils              #工具</br>
+    -com.rpc              </br>
+      -domain             #自定义rpc返回结果pojo</br>
+      -thrift             #协议生成的实体bean</br>
+  -com.goclass-common   #公共模块,目前没有东西在里面，估计会移除</br>
   -com.goclass-web      #WebService</br>
     #main/java目录下</br>
     -com.web</br>
@@ -33,6 +33,7 @@ com.goclass-parent</br>
       -global             #全局配置</br>
         -security           #权限安全配置</br>
         -utils              #工具</br>
+        -entity             #全局返回结果pojo，web需要自定义的参数实体bean都放在这里
     ----------------------------------------------
     #main/resources目录下</br>
     -application.yml    #配置文件</br>

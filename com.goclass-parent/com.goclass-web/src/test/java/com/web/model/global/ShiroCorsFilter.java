@@ -1,4 +1,4 @@
-package com.web.model.global.mvc;
+package com.web.model.global;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -19,6 +19,7 @@ public class ShiroCorsFilter extends BasicHttpAuthenticationFilter {
     	System.out.println("shiro into.....");
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+        httpServletResponse.setHeader("Access-Control-Allow-Credentials", "true");//标识允许ajax携带cookie认证信息
         httpServletResponse.setHeader("Access-control-Allow-Origin", httpServletRequest.getHeader("Origin")); //标识允许哪个域到请求，直接修改成请求头的域
         httpServletResponse.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS,PUT,DELETE");//标识允许的请求方法
         // 响应首部 Access-Control-Allow-Headers 用于 preflight request （预检请求）中，列出了将会在正式请求的 Access-Control-Expose-Headers 字段中出现的首部信息。修改为请求首部

@@ -17,4 +17,6 @@ public class LoginUser {
     private String status;
     
     private Date loginDate;
+    
+    private String sessionId;
 }

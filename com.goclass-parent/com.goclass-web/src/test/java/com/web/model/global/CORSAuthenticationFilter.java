@@ -1,4 +1,4 @@
-package com.web.model.global.config;
+package com.web.model.global;
 
 
 import javax.servlet.ServletRequest;

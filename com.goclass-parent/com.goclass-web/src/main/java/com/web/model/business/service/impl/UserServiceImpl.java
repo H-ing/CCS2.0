@@ -72,6 +72,9 @@ public class UserServiceImpl implements UserService {
 		loginUser.setUserId(user.getUserId());
 		loginUser.setUsername(user.getUsername());
 		loginUser.setAccounts(user.getAccounts());
+		
+		//设置sessionId
+		loginUser.setSessionId(subject.getSession().getId().toString());
 		return loginUser;
 	}
 

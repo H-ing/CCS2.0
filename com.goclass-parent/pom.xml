@@ -54,9 +54,7 @@
 	<modules>
 		<module>com.goclass-mapper</module>
 		<module>com.goclass-pojo</module>
-		<module>com.goclass-security</module>
 		<module>com.goclass-rpc</module>
-		<module>com.goclass-common</module>
 		<module>com.goclass-web</module>
 	</modules>
 </project>

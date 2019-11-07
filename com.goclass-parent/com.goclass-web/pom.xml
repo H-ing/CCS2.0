@@ -21,12 +21,6 @@
 			<artifactId>com.goclass-rpc</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		<!-- common公共配置、结果、工具模块 -->
-		<dependency>
-			<groupId>com.goclass</groupId>
-			<artifactId>com.goclass-common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 
 		<!-- web启动依赖 -->
 		<dependency>

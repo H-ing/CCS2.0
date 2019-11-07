@@ -14,13 +14,8 @@
 <pre>
 com.goclass-parent</br>
   -com.goclass-mapper   #orm映射文件</br>
-  -com.goclass-pojo     #orm映射实体</br>
-  -com.goclass-security #权限控制,<font color="red">已被移除</font></br> 
+  -com.goclass-pojo     #orm映射实体</br> 
   -com.goclass-rpc      #rpc调用</br>
-    -com.rpc              </br>
-      -domain             #自定义rpc返回结果pojo</br>
-      -thrift             #协议生成的实体bean</br>
-  -com.goclass-common   #公共模块,目前没有东西在里面，估计会移除</br>
   -com.goclass-web      #WebService</br>
     #main/java目录下</br>
     -com.web</br>

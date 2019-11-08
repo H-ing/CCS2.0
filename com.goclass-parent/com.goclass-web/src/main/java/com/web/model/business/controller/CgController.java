@@ -3,15 +3,13 @@ package com.web.model.business.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 
-import org.apache.ibatis.session.SqlSession;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 //import org.springframework.data.redis.core.StringRedisTemplate;
@@ -26,32 +24,6 @@ import com.goclass.mapper.PopulationMapper;
 import com.web.model.cg.bean.CreateTaskBean;
 import com.web.model.cg.bean.ServerMessageBean;
 import com.web.model.global.utils.CreateTaskTransform;
-
-//import com.alibaba.fastjson.JSON;
-//import com.alibaba.fastjson.JSONObject;
-//import com.web.model.business.cg.bean.create.CreateTaskBean;
-//import com.web.model.business.cg.bean.tserver.ServerMessageBean;
-//import com.web.model.business.cg.datasourcce.DataSourceConnection;
-//import com.web.model.business.cg.mapper.PopulationMapper;
-//import com.web.model.business.cg.tool.transform.CreateTaskTransform;
-//import com.web.model.rpc.client.container.ResultOfClassStrategyCreateTask;
-//import com.web.model.rpc.client.container.ResultOfClassStrategyGetTasksStatus;
-//import com.web.model.rpc.client.container.ResultOfClassStrategyRunTask;
-//import com.web.model.rpc.server.call.CallingTool;
-//import com.web.model.rpc.server.call.PropertyCopyTool;
-//import com.web.model.rpc.server.source.ClassStrategyRule;
-//import com.web.model.rpc.server.source.ResultOfGetClassStrategyRule;
-//import com.web.model.rpc.server.source.StageFiveResultOfClassStrategy;
-//import com.web.model.rpc.server.source.StageFourResultOfClassStrategy;
-//import com.web.model.rpc.server.source.StageOneResultOfClassStrategy;
-//import com.web.model.rpc.server.source.StageThreeResultOfClassStrategy;
-//import com.web.model.rpc.server.source.StageTwoResultOfClassStrategy;
-
-import springfox.documentation.spring.web.json.Json;
-
-//import com.web.model.rpc.server.source.ResultOfClassStrategyDelTask;
-//import com.web.model.rpc.server.source.ResultOfClassStrategyGetTaskResult;
-
 import goclass.rpc.server.call.PropertyCopyTool;
 import goclass.rpc.server.source.ClassStrategyRule;
 import goclass.rpc.server.source.ResultOfClassStrategyCreateTask;
@@ -65,9 +37,13 @@ import goclass.rpc.server.source.StageFourResultOfClassStrategy;
 import goclass.rpc.server.source.StageOneResultOfClassStrategy;
 import goclass.rpc.server.source.StageThreeResultOfClassStrategy;
 import goclass.rpc.server.source.StageTwoResultOfClassStrategy;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import goclass.rpc.server.call.CallingTool;
 @RestController
-@CrossOrigin
+@RequestMapping("/api/admin")
+@Api(tags = "分班管理")
+@RequiresRoles(value = {"db_admin", "admin"})
 public class CgController {
 	CallingTool globalCallingTool = new CallingTool();
 	
@@ -77,7 +53,7 @@ public class CgController {
 	@Autowired
 	PopulationMapper population;
 
-	//获取科目教师人数，各组合学生人数
+	@ApiOperation("获取科目教师人数，各组合学生人数")
 	@RequestMapping(value = "/class/grouping/data",method = RequestMethod.GET)
 	public Map<String, String> searchNumberOfTeacherOrStudent(
 			@RequestParam(value = "object") String object) {
@@ -85,8 +61,6 @@ public class CgController {
 		number.put("1", "人数");
 		int sumOfPeoples = 0 , tempData = 0;
 		CreateTaskTransform transformTool = new CreateTaskTransform();
-//		SqlSession sqlSession = new DataSourceConnection().getSqlSession();
-//		PopulationMapper population = sqlSession.getMapper(PopulationMapper.class);
 		if (object.equals("teacher")){
 			Short[] subjectList = transformTool.getSubjectCodeList();
 			for(Short temp:subjectList) {
@@ -94,7 +68,6 @@ public class CgController {
 				number.put(temp+"",tempData+"");
 				sumOfPeoples += tempData;
 			}
-//			number = population.selectNumberOfTeacherBySubjectId(subjectCode);
 		}else if (object.equals("student")){
 			Short[] sectionStudentNumberTransform= transformTool.getSectionStudentNumberTransform();
 			for(Short temp:sectionStudentNumberTransform) {
@@ -102,18 +75,14 @@ public class CgController {
 				number.put(temp+"",tempData+"");
 				sumOfPeoples += tempData;
 			}
-//			number = population.selectNumberOfStudentByCombinationId(subjectCode);
 		}else {
-//			number = ;
-//			sqlSession.close();
 			return null;
 		}
 		number.put("sum", sumOfPeoples + "");
-//		sqlSession.close();
 		return number;
 	}
 	
-	//创建分班任务
+	@ApiOperation("创建分班任务")
 	@RequestMapping(value = "/class/grouping/createtask" , method = RequestMethod.POST)
 	public ResultOfClassStrategyCreateTask createTask(
 			@RequestBody CreateTaskBean createTaskData) {
@@ -138,8 +107,7 @@ public class CgController {
 		return returnMessage;
 	}
 	
-	
-	//运行分班任务
+	@ApiOperation("运行分班任务")
 	@RequestMapping(value = "/class/grouping/runtask" , method = RequestMethod.POST)
 	public ResultOfClassStrategyRunTask runTask(
 			@RequestParam(value = "taskId") int taskId,
@@ -156,7 +124,7 @@ public class CgController {
 	}
 	
 	
-	//获取现有任务及其运行情况
+	@ApiOperation("获取现有任务及其运行情况")
 	@RequestMapping(value = "/class/grouping/taskstatus" , method = RequestMethod.GET)
 	public ResultOfClassStrategyGetTasksStatus getTasksStatusForClassStrategy() {
     	ResultOfClassStrategyGetTasksStatus returnMessage = new ResultOfClassStrategyGetTasksStatus();
@@ -169,6 +137,7 @@ public class CgController {
 		}
 		return returnMessage;
 	}
+	
 	@RequestMapping(value = "/class/grouping/unhandle" , method = RequestMethod.GET)
 	public Map getUnhandleData(
 			@RequestParam(value = "taskId") int taskId,
@@ -190,7 +159,7 @@ public class CgController {
 		return returnMessage;
 	}
 	
-	//获取任务结果
+	@ApiOperation("获取任务结果")
 	@RequestMapping(value = "/class/grouping/result" , method = RequestMethod.GET)
 	public Map getTaskResultForClassStrategy(
 			@RequestParam(value = "taskId") int taskId,
@@ -288,8 +257,6 @@ public class CgController {
 				
 				resultTable.add(sumOfSubjectClassNumber);
 				Map returnMessage = new HashMap<>();
-//				System.out.println(scoreTable);
-//				System.out.println(resultTable);
 				returnMessage.put("resultData", totalTable);
 				returnMessage.put("minClassNumber", minClassNumber);
 				returnMessage.put("scoreTable", resultTable);
@@ -518,10 +485,6 @@ public class CgController {
 						 tempMap.putAll(subjectStudentMap);
 						 group.add(tempMap);
 						 subjectStudentMap.clear();
-//						 for(Map.Entry<Integer, Set<Integer>> studentSet :
-//							 teachingClassList.get(teachingClass.get(i)).entrySet()) {
-//								 subjectStudentMap.put("c"+studentSet.getKey(), ""+studentSet.getValue().size());
-//						 }
 					}
 					 
 				 }
@@ -547,22 +510,15 @@ public class CgController {
 					 stageFiveResultOfClassStrategy.getAdminclassList();
 			 //每种组合的学生的具体信息
 			 //<组合代码 ： 列表[学生具体信息]>
-			 //Map<Integer, List<Map>>
 			 Map<Integer,List<Map>> studentSetForEachSelection = 
 					 new HashMap<>();
 			 Short[] sectionStudentNumberTransform = 
 					 CreateTaskTransform.getSectionStudentNumberTransform();
-//			 SqlSession sqlSession = new DataSourceConnection().getSqlSession();
-//			 PopulationMapper population = sqlSession.getMapper(PopulationMapper.class);
 			 for(int i=0;i<sectionStudentNumberTransform.length;i++) {
 				 List<Map> tempList = new ArrayList<>();
 				 tempList.addAll(population.selectStudentBySection(sectionStudentNumberTransform[i]));
 				 studentSetForEachSelection.put(Integer.valueOf(sectionStudentNumberTransform[i]), tempList);
 			 }
-//			 for(Map.Entry<Integer, List<Map>> tempEntry:studentSetForEachSelection.entrySet()) {
-//				 System.out.println("科目"+ tempEntry.getKey() +"有"+tempEntry.getValue().size()+"人");
-//			 }
-//			 sqlSession.close();
 			 //获取每个行政班 每种选课组合需要多少的学生
 			 		//[行政班数<科目组合代码: 学生人数>]
 			 List<Map<Integer, Integer>> adminClass = new ArrayList<>();
@@ -604,8 +560,6 @@ public class CgController {
 						 if(studentSetForEachSelection.get(classInfo.getKey()).size()!=0) {
 							int selector = random.nextInt(studentSetForEachSelection.get(classInfo.getKey()).size());
 							studentDetailInfo.add(studentSetForEachSelection.get(classInfo.getKey()).get(selector));
-//							selectionStudentDetail.put(""+adminclassList.get(classNum).get(classInfo.getKey()).get(selector)
-//									, studentSetForEachSelection.get(classInfo.getKey()).get(selector));
 							//与原数据对应
 							studentDataMap.get(""+classInfo.getKey()).put( 
 									""+adminclassList.get(classNum).get(classInfo.getKey()).get(0)
@@ -711,7 +665,7 @@ public class CgController {
 	}
 	
 	
-	//获取分班任务的现存规则
+	@ApiOperation("获取分班任务的现存规则")
 	@RequestMapping(value = "/class/grouping/rule" , method = RequestMethod.GET)
 	public ResultOfGetClassStrategyRule getClassStrategyRule(
 			@RequestParam(value = "taskId") int taskId) {
@@ -719,7 +673,7 @@ public class CgController {
 	}
 	
 	
-	//删除分班任务
+	@ApiOperation("删除分班任务")
 	@RequestMapping(value = "/class/grouping/delete" , method = RequestMethod.DELETE)
 	public ResultOfClassStrategyDelTask delTaskForClassStrategy(
 			@RequestParam(value = "taskId") int taskId
@@ -727,7 +681,7 @@ public class CgController {
 		return globalCallingTool.delTaskForClassStrategy(taskId);
 	}
 	
-	//测试 服务是否正常
+	@ApiOperation("测试 服务是否正常")
 	@RequestMapping(value = "/test/ping", method = RequestMethod.GET)
 	public ServerMessageBean serverTest() {
 		ServerMessageBean returnMessage = new ServerMessageBean();

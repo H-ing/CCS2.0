@@ -1,5 +1,7 @@
 package com.web.model.business.service;
 
+import com.web.model.global.entity.RequestRule;
+
 import goclass.rpc.server.source.ClassScheduleRule;
 import goclass.rpc.server.source.ResultOfClassScheduleCreateTask;
 import goclass.rpc.server.source.ResultOfClassScheduleGetTaskResult;
@@ -16,7 +18,7 @@ public interface KeBiaoService {
 	 * @param rule
 	 * @return
 	 */
-	public ResultOfClassScheduleCreateTask createTaskForClassSchedule(ClassScheduleRule rule, int taskId);
+	public ResultOfClassScheduleCreateTask createTaskForClassSchedule(RequestRule rule, int taskId);
 	/**
 	 * 运行排课任务  异步的形式
 	 * @param taskId 任务id

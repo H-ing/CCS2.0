@@ -11,11 +11,13 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.goclass.pojo.Subject;
+import com.web.model.business.cg.bean.create.StageFiveData;
 import com.web.model.business.service.ClassroomService;
 import com.web.model.business.service.FifthResultService;
 import com.web.model.business.service.KeBiaoService;
 import com.web.model.business.service.SubjectService;
 import com.web.model.business.service.TeacherService;
+import com.web.model.global.entity.RequestRule;
 
 import goclass.rpc.server.call.CallingTool;
 import goclass.rpc.server.source.ClassScheduleRule;
@@ -345,35 +347,76 @@ public class KeBiaoServiceImpl implements KeBiaoService{
 		rule.setClassroomList(classroomList);
 	}
 	/**
-	 * 获取第五阶段分班后行政班对应结果集，并解析出行政班个数，为行政班分配教室，然后添加进规则
-	 */
-	public void setTeachingclassClassroomList(ClassScheduleRule rule, int taskId) {
-
-	}
-	/**
 	 * 获取第五阶段结果
 	 * @return
 	 */
 	public StageFiveResultOfClassStrategy getStageFiveResultOfClassStrategy() {
-		StageFiveResultOfClassStrategy stageFiveResultOfClassStrategy = (StageFiveResultOfClassStrategy) fifthResultService.findOne();
+		StageFiveData stageFiveData = (StageFiveData)fifthResultService.findOne();
+		StageFiveResultOfClassStrategy stageFiveResultOfClassStrategy = new StageFiveResultOfClassStrategy();
+		stageFiveResultOfClassStrategy.setAdminclassList(stageFiveData.getAdminclassList());
+		stageFiveResultOfClassStrategy.setAdminclassMixteachingclassList(stageFiveData.getAdminclassMixteachingclassList());
+		stageFiveResultOfClassStrategy.setMixteachingclassAdminclassesList(stageFiveData.getMixteachingclassAdminclassesList());
+		stageFiveResultOfClassStrategy.setMixteachingclassList(stageFiveData.getMixteachingclassList());
+		stageFiveResultOfClassStrategy.setSubjectDict(stageFiveData.getSubjectDict());
+		stageFiveResultOfClassStrategy.setTeachingclassIndexList(stageFiveData.getTeachingclassIndexList());
+		stageFiveResultOfClassStrategy.setTeachingclassList(stageFiveData.getTeachingclassList());
 		return stageFiveResultOfClassStrategy;
 	}
+	/**
+	 * 为每个行政班分配对应的教室索引,然后添加进规则
+	 * @param size 行政班数
+	 */
+	public void setTeachingclassClassroomList(ClassScheduleRule rule, int size) {
+		List<Long> classroomIds = classroomService.queryAllId();
+		List<Integer> teachingclassClassroomList = new ArrayList<>();
+		//计数添加多少个教室
+		int i = 0;
+		for (Long id : classroomIds) {
+			teachingclassClassroomList.add(id.intValue());
+			i++;
+			//当行政班数小于等于教室数时，计数到达行政班数时停止分配
+			if (i == size) {
+				break;
+			}
+		}
+		//当教室数小于行政班数时，继续分配序号直到分完所有行政班
+		while (size > i) {
+			teachingclassClassroomList.add(i++);
+		}
+		rule.setTeachingclassClassroomList(teachingclassClassroomList);
+	}
 	
-	
-	
-	
+	/**
+	 * 创建排课任务
+	 */
 	@Override
-	public ResultOfClassScheduleCreateTask createTaskForClassSchedule(ClassScheduleRule rule, int taskId) {
+	public ResultOfClassScheduleCreateTask createTaskForClassSchedule(RequestRule rule, int taskId) {
+		//创建排课规则
+		ClassScheduleRule classScheduleRule = new ClassScheduleRule();
 		//设置第五阶段结果
-		rule.setStageFiveResultOfClassStrategy(getStageFiveResultOfClassStrategy());
+		StageFiveResultOfClassStrategy stageFiveResultOfClassStrategy = getStageFiveResultOfClassStrategy();
+		classScheduleRule.setStageFiveResultOfClassStrategy(stageFiveResultOfClassStrategy);
+		//设置teachingclassClassroomList
+		int size = stageFiveResultOfClassStrategy.getAdminclassList().size();
+		setTeachingclassClassroomList(classScheduleRule, size);
 		//设置TeacherList
-		setTeacherList(rule);
+		setTeacherList(classScheduleRule);
 		//设置classroomList
-		setClassroomList(rule);
+		setClassroomList(classScheduleRule);
 		//设置teachingclassTeacherList
-		setTeachingclassTeacherList(rule);
+		setTeachingclassTeacherList(classScheduleRule);
+		//设置每个科目每周的节次subjectSubjectcount
+		classScheduleRule.setSubjectSubjectcount(rule.getSubjectSubjectcount());
+		//设置一天的节次onedaySession
+		classScheduleRule.setOnedaySession(rule.getOnedaySession());
+		//设置固排课表positiveClassSchedule
+		classScheduleRule.setPositiveClassSchedule(rule.getPositiveClassSchedule());
+		//设置禁排课表negativeClassSchedule
+		classScheduleRule.setNegativeClassSchedule(rule.getNegativeClassSchedule());
+		//设置连排connectClass
+		classScheduleRule.setConnectClass(rule.getConnectClass());
 		
-		return callingTool.createTaskForClassSchedule(rule);
+		return callingTool.createTaskForClassSchedule(classScheduleRule);
 	}
 
 	@Override

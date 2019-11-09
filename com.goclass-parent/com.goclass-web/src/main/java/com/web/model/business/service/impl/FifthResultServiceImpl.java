@@ -50,7 +50,6 @@ public class FifthResultServiceImpl implements FifthResultService {
         byte[] bytes = fiveResult.getFiveresultDatavalue();
         try{
             object = BlobUtil.getObject(bytes);
-            System.out.println("obeject 是否为空：" + object == null);
         }catch (Exception e){
             System.out.println("序列化失败");
         }

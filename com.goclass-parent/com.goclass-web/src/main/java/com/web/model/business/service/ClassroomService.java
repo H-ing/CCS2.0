@@ -18,5 +18,7 @@ public interface ClassroomService {
 	public void delById(Long id);
 	
 	public void delByIds(Long[] ids);
+	
+	public List<Long> queryAllId();
 }
 

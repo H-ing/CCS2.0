@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -43,7 +44,8 @@ import goclass.rpc.server.call.CallingTool;
 @RestController
 @RequestMapping("/api/admin")
 @Api(tags = "分班管理")
-@RequiresRoles(value = {"db_admin", "admin"})
+@RequiresRoles(value = {"db_admin", "admin"}, logical = Logical.OR)
+@CrossOrigin
 public class CgController {
 	CallingTool globalCallingTool = new CallingTool();
 	
@@ -79,6 +81,7 @@ public class CgController {
 			return null;
 		}
 		number.put("sum", sumOfPeoples + "");
+		System.out.println(number.toString());
 		return number;
 	}
 	

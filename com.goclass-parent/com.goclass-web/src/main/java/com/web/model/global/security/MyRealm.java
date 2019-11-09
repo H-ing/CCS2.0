@@ -43,7 +43,7 @@ public class MyRealm extends AuthorizingRealm {
 	 */
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken)
 			throws AuthenticationException {
-		logger.info("执行认证。。。");
+		logger.info("执行认证。。。" + "Date time : " + System.currentTimeMillis());
 
 		// 取出登录用户账号
 		String accounts = (String) authenticationToken.getPrincipal();
@@ -79,7 +79,7 @@ public class MyRealm extends AuthorizingRealm {
 	 * @return
 	 */
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-		logger.info("执行授权。。。。");
+		logger.info("执行授权。。。。" + "Date time : " + System.currentTimeMillis());
 		// 取出身份信息
 		User user = (User) principalCollection.getPrimaryPrincipal();
 

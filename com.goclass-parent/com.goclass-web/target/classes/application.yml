@@ -1,5 +1,5 @@
 server:
-  port: 5050  
+  port: 5051  
   servlet:
     context-path: /goclass
 #连接池
@@ -60,4 +60,5 @@ spring:
         login-password: 123456
   #redis
   redis:
-    host: 127.0.0.1
+    host: lede.dalaomai.cn
+    port: 5009

@@ -48,7 +48,9 @@ struct StageFourResultOfClassStrategy{
 }
 struct StageFiveResultOfClassStrategy{
     1:map<string,i32> subjectDict  //{学科名称:学科代码}   包含了所有的学科
+	
     2:list<map<i32,list<i32>>> adminclassList  //行政班数*{科目组合代码:学生集}    每个行政班包含的科目组合学生集
+	
     3:list<map<i32,list<i32>>> teachingclassList   //教学班*{科目组合代码:学生集}    每个教学班包含的科目组合学生集
     4:list<list<i32>>   mixteachingclassList   //混合教学班数*所包含的教学班序号   每个混合教学班包含的教学班，教学班序号即teachingclass_list对应的索引
     5:list<map<i32,i32>>  teachingclassIndexList  //教学班数*{科目代码:编号}      每个教学班对应的科目以及编号，通过科目：编号可确定教学班
@@ -119,7 +121,7 @@ struct ResultOfGetClassStrategyRule{
 struct ClassScheduleRule{
     1:StageFiveResultOfClassStrategy    StageFiveResultOfClassStrategy
     2:map<i32,i16>  subjectSubjectcount     //{科目代码：接次数} 每个科目每周的节次
-    3:list<i16> onedaySession   //一天的节次 例子[0,1,2,3,4,5,6]    一天七节
+    3:list<i16> onedaySession   //一天的节次 例子[0,1,2,3,4,5,6]    一天七节  
     4:list<map<i32,i16>> teacherList    //教师数*{科目代码：序号}   任课老师列表
     5:list<i32> teachingclassTeacherList    //教学班数*任课老师索引 对应着各自的list：teachingclass_list、teacher_list.后面的索引自行对应
     6:list<i32> classroomList   //教室集

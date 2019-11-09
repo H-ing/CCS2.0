@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.goclass.mapper.ClassroomMapper">
+
+	<!-- 获取教室集id -->
+	<select id="queryAllId" resultType="java.lang.Long">
+		SELECT 
+			classroom_id 
+		FROM tb_classroom
+	</select>
+
+
+
   <resultMap id="BaseResultMap" type="com.goclass.pojo.Classroom">
     <id column="classroom_id" jdbcType="BIGINT" property="classroomId" />
     <result column="classroom_name" jdbcType="VARCHAR" property="classroomName" />

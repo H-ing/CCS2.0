@@ -13,4 +13,8 @@ public interface TeacherService {
 	public Teacherswill queryTimeWillByWillId(Long willId);
 	
 	public void isAcceptTeacherTimeWill(Long willId, Integer accept);
+	
+	public List<Long> queryTeacherIdBySubjectId(Long subjectId);
+	
+	public List<Integer> queryAllCourseIds();
 }

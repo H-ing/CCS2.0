@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.goclass.mapper.TeacherMapper">
+	<!-- 根据科目id获取教师id -->
+	<select id="queryTeacherIdBySubjectId" parameterType="java.lang.String" resultType="java.lang.Long">
+		SELECT teacher_id 
+		FROM tb_teacher
+		WHERE course_id = #{subjectId}
+	</select>
+	<!-- 获取所有的老师的对应的教学科目id -->
+	<select id="queryAllCourseIds" resultType="java.lang.Integer">
+		SELECT course_id 
+		FROM tb_teacher
+	</select>
+
+
+
   <resultMap id="BaseResultMap" type="com.goclass.pojo.Teacher">
     <id column="teacher_id" jdbcType="BIGINT" property="teacherId" />
     <result column="teacher_name" jdbcType="VARCHAR" property="teacherName" />

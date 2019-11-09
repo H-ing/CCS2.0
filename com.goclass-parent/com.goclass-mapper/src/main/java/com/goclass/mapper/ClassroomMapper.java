@@ -27,4 +27,9 @@ public interface ClassroomMapper {
     int updateByPrimaryKeySelective(Classroom record);
 
     int updateByPrimaryKey(Classroom record);
+    
+    /**
+     * 获取教室集id
+     */
+    List<Long> queryAllId();
 }

@@ -23,14 +23,16 @@ import goclass.rpc.server.source.ResultOfClassStrategyRunTask;
 import goclass.rpc.server.source.ResultOfGetClassStrategyRule;
 
 
-
 public class CallingTool {
-	Connection connection = new Connection();
-	Client client = connection.getClient();
+	private static Client client;
+	static {
+		Connection connection = new Connection();
+		client = connection.getClient();
+	}
 	//创建分班任务
 	public ResultOfClassStrategyCreateTask createTaskForClassStrategy(ClassStrategyRule rule) {
 		try {
-			return this.client.createTaskForClassStrategy(rule);
+			return client.createTaskForClassStrategy(rule);
 		} catch (TException e) {
 			// TODO: handle exception
 			System.out.println("调用失败");
@@ -41,7 +43,7 @@ public class CallingTool {
 	//运行分班任务
 	public ResultOfClassStrategyRunTask runTaskForClassStrategy(int taskID,int stage) {
 		try {
-			return this.client.runTaskForClassStrategy(taskID, stage);
+			return client.runTaskForClassStrategy(taskID, stage);
 		} catch (TException e) {
 			// TODO: handle exception
 			System.out.println("调用失败");
@@ -52,7 +54,7 @@ public class CallingTool {
 	//获取现有任务及其运行情况
 	public ResultOfClassStrategyGetTasksStatus getTasksStatusForClassStrategy() {
 		try {
-			return this.client.getTasksStatusForClassStrategy();
+			return client.getTasksStatusForClassStrategy();
 		} catch (TException e) {
 			System.out.println("调用失败");
 			e.printStackTrace();
@@ -63,7 +65,7 @@ public class CallingTool {
 	//获取任务结果
 	public ResultOfClassStrategyGetTaskResult getTaskResultForClassStrategy(int taskID,int stage) {
 		try {
-			return this.client.getTaskResultForClassStrategy(taskID, stage);
+			return client.getTaskResultForClassStrategy(taskID, stage);
 		} catch (TException e) {
 			System.out.println("调用失败");
 			e.printStackTrace();
@@ -74,7 +76,7 @@ public class CallingTool {
 	//修改结果
 	public ResultOfClassStrategyModifyTaskResult modifyTaskResultForClassStrategy(ClassStrategyModifyResult classStrategyModifyResult) {
 		try {
-			return this.client.modifyTaskResultForClassStrategy(classStrategyModifyResult);
+			return client.modifyTaskResultForClassStrategy(classStrategyModifyResult);
 		} catch (TException e) {
 			System.out.println("调用失败");
 			e.printStackTrace();
@@ -85,7 +87,7 @@ public class CallingTool {
 	//获取分班任务的现存规则
 	public ResultOfGetClassStrategyRule getClassStrategyRule(int taskID) {
 		try {
-			return this.client.getClassStrategyRule(taskID);
+			return client.getClassStrategyRule(taskID);
 		} catch (TException e) {
 			System.out.println("调用失败");
 			e.printStackTrace();
@@ -96,7 +98,7 @@ public class CallingTool {
 	//删除分班任务
 	public ResultOfClassStrategyDelTask delTaskForClassStrategy(int taskID) {
 		try {
-			return this.client.delTaskForClassStrategy(taskID);
+			return client.delTaskForClassStrategy(taskID);
 		} catch (TException e) {
 			System.out.println("调用失败");
 			e.printStackTrace();
@@ -107,7 +109,7 @@ public class CallingTool {
 	//模拟数据，测试用的
 	public ResultOfClassScheduleSimulateData simulateDataForClassSchedule() {
 		try {
-			return this.client.simulateDataForClassSchedule();
+			return client.simulateDataForClassSchedule();
 		} catch (TException e) {
 			System.out.println("调用失败");
 			e.printStackTrace();
@@ -118,7 +120,7 @@ public class CallingTool {
 	//创建排课任务
 	public ResultOfClassScheduleCreateTask createTaskForClassSchedule(ClassScheduleRule rule) {
 		try {
-			return this.client.createTaskForClassSchedule(rule);
+			return client.createTaskForClassSchedule(rule);
 		} catch (TException e) {
 			System.out.println("调用失败");
 			e.printStackTrace();
@@ -129,7 +131,7 @@ public class CallingTool {
 	//删除排课任务
 	public ResultOfClassScheduleDelTask delTaskForClassSchedule(int taskId) {
 		try {
-			return this.client.delTaskForClassSchedule(taskId);
+			return client.delTaskForClassSchedule(taskId);
 		} catch (TException e) {
 			System.out.println("调用失败");
 			e.printStackTrace();
@@ -140,7 +142,7 @@ public class CallingTool {
 	//运行排课任务  异步的形式
 	public ResultOfClassScheduleRunTask runTaskForClassSchedule(int taskId,int stage) {
 		try {
-			return this.client.runTaskForClassSchedule(taskId, stage);
+			return client.runTaskForClassSchedule(taskId, stage);
 		} catch (TException e) {
 			System.out.println("调用失败");
 			e.printStackTrace();
@@ -151,7 +153,7 @@ public class CallingTool {
 	//获取现有排课任务及其运行情况
 	public ResultOfClassScheduleGetTasksStatus getTasksStatusForClassSchedule() {
 		try {
-			return this.client.getTasksStatusForClassSchedule();
+			return client.getTasksStatusForClassSchedule();
 		} catch (TException e) {
 			System.out.println("调用失败");
 			e.printStackTrace();
@@ -162,7 +164,7 @@ public class CallingTool {
 	//停止排课任务
 	public ResultOfClassScheduleStopTask stopTaskForClassSchedule(int taskId) {
 		try {
-			return this.client.stopTaskForClassSchedule(taskId);
+			return client.stopTaskForClassSchedule(taskId);
 		} catch (TException e) {
 			System.out.println("调用失败");
 			e.printStackTrace();
@@ -173,7 +175,7 @@ public class CallingTool {
 	//获取排课任务结果
 	public ResultOfClassScheduleGetTaskResult getTaskResultForClassSchedule(int taskId,int stage) {
 		try {
-			return this.client.getTaskResultForClassSchedule(taskId,stage);
+			return client.getTaskResultForClassSchedule(taskId,stage);
 		} catch (TException e) {
 			System.out.println("调用失败");
 			e.printStackTrace();
@@ -183,7 +185,7 @@ public class CallingTool {
 	}
 	public Boolean ping() {
 		try {
-			return this.client.ping();
+			return client.ping();
 		} catch (Exception e) {
 			System.out.println("调用失败");
 			e.printStackTrace();

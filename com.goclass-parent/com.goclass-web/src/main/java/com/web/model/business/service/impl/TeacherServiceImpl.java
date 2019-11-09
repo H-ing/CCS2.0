@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
+import com.goclass.mapper.TeacherMapper;
 import com.goclass.mapper.TeacherswillMapper;
 import com.goclass.pojo.Teacherswill;
 import com.web.model.business.service.TeacherService;
@@ -16,6 +17,9 @@ import com.web.model.global.entity.TeacherWillTime;
 public class TeacherServiceImpl implements TeacherService{
 	@Autowired
 	private TeacherswillMapper teacherswillMapper;
+	
+	@Autowired
+	private TeacherMapper teacherMapper;
 
 	@Override
 	public void addTimeWill(TeacherWillTime teacherWillTime) {
@@ -57,5 +61,15 @@ public class TeacherServiceImpl implements TeacherService{
 		}
 		teacherswillMapper.updateByPrimaryKey(teacherswill);
 	}
+	
+	public List<Long> queryTeacherIdBySubjectId(Long subjectId) {
+		return teacherMapper.queryTeacherIdBySubjectId(subjectId);
+	}
+
+	@Override
+	public List<Integer> queryAllCourseIds() {
+		return teacherMapper.queryAllCourseIds();
+	}
+
 
 }

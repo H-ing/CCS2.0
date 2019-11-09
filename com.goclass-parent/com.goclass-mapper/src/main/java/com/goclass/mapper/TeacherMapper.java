@@ -27,4 +27,8 @@ public interface TeacherMapper {
     int updateByPrimaryKeySelective(Teacher record);
 
     int updateByPrimaryKey(Teacher record);
+    
+    List<Long> queryTeacherIdBySubjectId( @Param("subjectId")Long subjectId);
+    
+    List<Integer> queryAllCourseIds();
 }

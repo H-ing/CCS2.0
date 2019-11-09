@@ -42,5 +42,5 @@ public class SubjectServiceImpl implements SubjectService{
 			subjectMapper.deleteByPrimaryKey(id);
 		}
 	}
-
+	
 }

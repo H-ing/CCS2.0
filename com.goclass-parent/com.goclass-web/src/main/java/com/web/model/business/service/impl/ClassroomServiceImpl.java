@@ -56,5 +56,9 @@ public class ClassroomServiceImpl implements ClassroomService{
 			classroomMapper.deleteByPrimaryKey(id);
 		}
 	}
-
+	
+	@Override
+	public List<Long> queryAllId() {
+		return classroomMapper.queryAllId();
+	}
 }

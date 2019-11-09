@@ -4,6 +4,9 @@ import com.goclass.mapper.TbFifthResultMapper;
 import com.goclass.pojo.TbFifthResult;
 import com.web.model.business.service.FifthResultService;
 import com.web.model.global.utils.BlobUtil;
+
+import goclass.rpc.server.source.StageFiveResultOfClassStrategy;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +50,7 @@ public class FifthResultServiceImpl implements FifthResultService {
         byte[] bytes = fiveResult.getFiveresultDatavalue();
         try{
             object = BlobUtil.getObject(bytes);
+            System.out.println("obeject 是否为空：" + object == null);
         }catch (Exception e){
             System.out.println("序列化失败");
         }

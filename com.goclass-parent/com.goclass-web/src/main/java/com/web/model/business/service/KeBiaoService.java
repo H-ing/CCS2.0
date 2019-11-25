@@ -1,8 +1,12 @@
 package com.web.model.business.service;
 
+<<<<<<< HEAD
 import java.util.List;
 
 import com.goclass.pojo.Kebiao;
+=======
+import com.web.model.global.entity.RequestRule;
+>>>>>>> 9cccb039f5942c4e26fd0138a2b17a1a47e60d1b
 
 import goclass.rpc.server.source.ClassScheduleRule;
 import goclass.rpc.server.source.ResultOfClassScheduleCreateTask;
@@ -32,7 +36,7 @@ public interface KeBiaoService {
 	 * @param rule
 	 * @return
 	 */
-	public ResultOfClassScheduleCreateTask createTaskForClassSchedule(ClassScheduleRule rule, int taskId);
+	public ResultOfClassScheduleCreateTask createTaskForClassSchedule(RequestRule rule, int taskId);
 	/**
 	 * 运行排课任务  异步的形式
 	 * @param taskId 任务id

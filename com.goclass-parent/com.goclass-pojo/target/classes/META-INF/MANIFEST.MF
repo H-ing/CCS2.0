@@ -1,9 +1,15 @@
 Manifest-Version: 1.0
 Implementation-Title: com.goclass-pojo
 Implementation-Version: 0.0.1-SNAPSHOT
+<<<<<<< HEAD
 Built-By: pengdehe
 Implementation-Vendor-Id: com.goclass
 Build-Jdk: 1.8.0_201
+=======
+Built-By: Administrator
+Implementation-Vendor-Id: com.goclass
+Build-Jdk: 1.8.0_211
+>>>>>>> 9cccb039f5942c4e26fd0138a2b17a1a47e60d1b
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
  ot-starter-parent/com.goclass-parent/com.goclass-pojo
 Created-By: Maven Integration for Eclipse

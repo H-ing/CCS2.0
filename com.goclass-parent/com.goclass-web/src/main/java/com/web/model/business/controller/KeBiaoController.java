@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.goclass.pojo.Kebiao;
 import com.web.model.business.service.KeBiaoService;
+import com.web.model.global.entity.RequestRule;
 
 import goclass.rpc.server.source.ClassScheduleRule;
 import goclass.rpc.server.source.ResultOfClassScheduleCreateTask;
@@ -40,7 +41,7 @@ public class KeBiaoController {
 
 	@RequestMapping(value = "/task", method = RequestMethod.POST)
 	@ApiOperation("创建排课任务")
-	public ResultOfClassScheduleCreateTask createTaskForClassSchedule(@RequestBody ClassScheduleRule rule, int taskId) {
+	public ResultOfClassScheduleCreateTask createTaskForClassSchedule(@RequestBody RequestRule rule, int taskId) {
 		log.info("创建排课任务,规则（rule）: " + rule.toString());
 		return keBiaoService.createTaskForClassSchedule(rule, taskId);
 	}

@@ -4,7 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class TbFifthResult implements Serializable {
-    private Long fiveresultId;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long fiveresultId;
 
     private Date gmtCreate;
 

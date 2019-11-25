@@ -1,10 +1,10 @@
 package com.goclass.pojo;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Student {
-    private Long studentId;
+public class Student{
+
+	private Long studentId;
 
     private String studentName;
 

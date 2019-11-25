@@ -55,4 +55,8 @@ public class StageFiveData implements Serializable{
 		this.mixteachingclassAdminclassesList = mixteachingclassAdminclassesList;
 	}
 	
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 9cccb039f5942c4e26fd0138a2b17a1a47e60d1b

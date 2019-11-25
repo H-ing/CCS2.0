@@ -4,6 +4,9 @@ import com.goclass.mapper.TbFifthResultMapper;
 import com.goclass.pojo.TbFifthResult;
 import com.web.model.business.service.FifthResultService;
 import com.web.model.global.utils.BlobUtil;
+
+import goclass.rpc.server.source.StageFiveResultOfClassStrategy;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

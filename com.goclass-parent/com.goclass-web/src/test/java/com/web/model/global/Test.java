@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+<<<<<<< HEAD
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -47,6 +48,14 @@ import goclass.rpc.server.source.ResultOfClassScheduleSimulateData;
 import goclass.rpc.server.source.ResultOfClassScheduleStopTask;
 import goclass.rpc.server.source.StageFiveResultOfClassStrategy;
 import goclass.rpc.server.source.StageTwoResultOfClassSchedule;
+=======
+import com.goclass.pojo.TbFifthResult;
+import com.web.model.business.cg.bean.create.StageFiveData;
+import com.web.model.business.service.FifthResultService;
+import com.web.model.business.service.UserService;
+
+import goclass.rpc.server.source.StageFiveResultOfClassStrategy;
+>>>>>>> 9cccb039f5942c4e26fd0138a2b17a1a47e60d1b
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -76,6 +85,7 @@ public class Test {
 	}
 
 	@Autowired
+<<<<<<< HEAD
 	KeBiaoService keBiaoService;
 	@Autowired
 	FifthResultService fifthResultService;
@@ -87,6 +97,11 @@ public class Test {
 	TeaclassMapper teaclassMapper;
 	@Autowired
 	KebiaoMapper kebiaoMapper;
+=======
+	UserService userService;
+	@Autowired
+	FifthResultService fifthResultService;
+>>>>>>> 9cccb039f5942c4e26fd0138a2b17a1a47e60d1b
 	
 	@org.junit.Test
 	public void teachingclassClassroomList() {
@@ -332,6 +347,7 @@ public class Test {
 
 	@org.junit.Test
 	public void test() {
+<<<<<<< HEAD
 		// ResultOfClassScheduleCreateTask createTaskForClassSchedule =
 		// keBiaoService.createTaskForClassSchedule(null, 0);
 		// System.out.println(createTaskForClassSchedule.toString());
@@ -370,5 +386,18 @@ public class Test {
 		// ResultOfClassScheduleGetTaskResult taskResultForClassSchedule =
 		// keBiaoService.getTaskResultForClassSchedule(7, 2);
 		// System.out.println(taskResultForClassSchedule.toString());
+=======
+		StageFiveData stageFiveData = (StageFiveData)fifthResultService.findOne();
+		StageFiveResultOfClassStrategy stageFiveResultOfClassStrategy = new StageFiveResultOfClassStrategy();
+		stageFiveResultOfClassStrategy.setAdminclassList(stageFiveData.getAdminclassList());
+		stageFiveResultOfClassStrategy.setAdminclassMixteachingclassList(stageFiveData.getAdminclassMixteachingclassList());
+		stageFiveResultOfClassStrategy.setMixteachingclassAdminclassesList(stageFiveData.getMixteachingclassAdminclassesList());
+		stageFiveResultOfClassStrategy.setMixteachingclassList(stageFiveData.getMixteachingclassList());
+		stageFiveResultOfClassStrategy.setSubjectDict(stageFiveData.getSubjectDict());
+		stageFiveResultOfClassStrategy.setTeachingclassIndexList(stageFiveData.getTeachingclassIndexList());
+		stageFiveResultOfClassStrategy.setTeachingclassList(stageFiveData.getTeachingclassList());
+		
+		System.out.println(stageFiveResultOfClassStrategy.toString());
+>>>>>>> 9cccb039f5942c4e26fd0138a2b17a1a47e60d1b
 	}
 }

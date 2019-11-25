@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import com.goclass.mapper.KebiaoMapper;
+import com.goclass.pojo.Kebiao;
 import com.goclass.pojo.Subject;
 import com.web.model.business.service.ClassroomService;
 import com.web.model.business.service.KeBiaoService;
@@ -18,9 +20,12 @@ import com.web.model.business.service.TeacherService;
 import goclass.rpc.server.call.CallingTool;
 import goclass.rpc.server.source.ClassScheduleRule;
 import goclass.rpc.server.source.ResultOfClassScheduleCreateTask;
+import goclass.rpc.server.source.ResultOfClassScheduleDelTask;
 import goclass.rpc.server.source.ResultOfClassScheduleGetTaskResult;
 import goclass.rpc.server.source.ResultOfClassScheduleGetTasksStatus;
 import goclass.rpc.server.source.ResultOfClassScheduleRunTask;
+import goclass.rpc.server.source.ResultOfClassScheduleSimulateData;
+import goclass.rpc.server.source.ResultOfClassScheduleStopTask;
 
 @Service
 public class KeBiaoServiceImpl implements KeBiaoService{
@@ -84,7 +89,7 @@ public class KeBiaoServiceImpl implements KeBiaoService{
 	@Autowired 
 	private TeacherService teacherService;
 	@Autowired
-	private RedisTemplate<String, Object> redisTemplate;
+	private KebiaoMapper kebiaoMapper;
 
 	private CallingTool callingTool = new CallingTool();
 	
@@ -212,24 +217,14 @@ public class KeBiaoServiceImpl implements KeBiaoService{
 		}
 		rule.setClassroomList(classroomList);
 	}
-	/**
-	 * 获取第五阶段分班后行政班对应结果集，并解析出行政班个数，为行政班分配教室，然后添加进规则
-	 */
-	public void setTeachingclassClassroomList(ClassScheduleRule rule, int taskId) {
-		redisTemplate.boundHashOps(taskId + "_" );
-	}
-	public void name() {
-		
-	}
 	@Override
 	public ResultOfClassScheduleCreateTask createTaskForClassSchedule(ClassScheduleRule rule, int taskId) {
-		//设置TeacherList
-		setTeacherList(rule);
-		//设置classroomList
-		setClassroomList(rule);
-		
-		
-		return callingTool.createTaskForClassSchedule(rule);
+//		//设置TeacherList
+//		setTeacherList(rule);
+//		//设置classroomList
+//		setClassroomList(rule);
+//		return callingTool.createTaskForClassSchedule(rule);
+		return callingTool.createTaskForClassSchedule(getSimulateData().getClassScheduleRule());
 	}
 
 	@Override
@@ -246,5 +241,22 @@ public class KeBiaoServiceImpl implements KeBiaoService{
 	public ResultOfClassScheduleGetTaskResult getTaskResultForClassSchedule(Integer taskId, Integer stage) {
 		return callingTool.getTaskResultForClassSchedule(taskId, stage);
 	}
-
+	
+	public ResultOfClassScheduleStopTask stop(int taskId) {
+		ResultOfClassScheduleStopTask stopTaskForClassSchedule = callingTool.stopTaskForClassSchedule(taskId);
+		return stopTaskForClassSchedule;
+	}
+	
+	public ResultOfClassScheduleSimulateData getSimulateData() {
+		ResultOfClassScheduleSimulateData simulateDataForClassSchedule = callingTool.simulateDataForClassSchedule();
+		return simulateDataForClassSchedule;
+	}
+	
+	public ResultOfClassScheduleDelTask delTaskForClassSchedule(int taskId) {
+		return callingTool.delTaskForClassSchedule(taskId);
+	}
+	@Override
+	public List<Kebiao> queryAll() {
+		return kebiaoMapper.selectByExample(null);
+	}
 }

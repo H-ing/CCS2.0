@@ -1,5 +1,7 @@
 package com.web.model.business.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.goclass.pojo.Kebiao;
 import com.web.model.business.service.KeBiaoService;
 
 import goclass.rpc.server.source.ClassScheduleRule;
@@ -28,6 +31,12 @@ public class KeBiaoController {
 
 	@Autowired
 	private KeBiaoService keBiaoService;
+	
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@ApiOperation("获取所有课表")
+	public List<Kebiao> queryAll() {
+		return keBiaoService.queryAll();
+	}
 
 	@RequestMapping(value = "/task", method = RequestMethod.POST)
 	@ApiOperation("创建排课任务")

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.goclass.mapper.KebiaoMapper">
+  <resultMap id="BaseResultMap" type="com.goclass.pojo.Kebiao">
+    <id column="schedul_id" jdbcType="BIGINT" property="schedulId" />
+    <result column="admin_id" jdbcType="BIGINT" property="adminId" />
+    <result column="schedul" jdbcType="VARCHAR" property="schedul" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    schedul_id, admin_id, schedul
+  </sql>
+  <select id="selectByExample" parameterType="com.goclass.pojo.KebiaoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from kebiao
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from kebiao
+    where schedul_id = #{schedulId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from kebiao
+    where schedul_id = #{schedulId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.goclass.pojo.KebiaoExample">
+    delete from kebiao
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.goclass.pojo.Kebiao">
+    insert into kebiao (schedul_id, admin_id, schedul
+      )
+    values (#{schedulId,jdbcType=BIGINT}, #{adminId,jdbcType=BIGINT}, #{schedul,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.goclass.pojo.Kebiao">
+    insert into kebiao
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="schedulId != null">
+        schedul_id,
+      </if>
+      <if test="adminId != null">
+        admin_id,
+      </if>
+      <if test="schedul != null">
+        schedul,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="schedulId != null">
+        #{schedulId,jdbcType=BIGINT},
+      </if>
+      <if test="adminId != null">
+        #{adminId,jdbcType=BIGINT},
+      </if>
+      <if test="schedul != null">
+        #{schedul,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.goclass.pojo.KebiaoExample" resultType="java.lang.Long">
+    select count(*) from kebiao
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update kebiao
+    <set>
+      <if test="record.schedulId != null">
+        schedul_id = #{record.schedulId,jdbcType=BIGINT},
+      </if>
+      <if test="record.adminId != null">
+        admin_id = #{record.adminId,jdbcType=BIGINT},
+      </if>
+      <if test="record.schedul != null">
+        schedul = #{record.schedul,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update kebiao
+    set schedul_id = #{record.schedulId,jdbcType=BIGINT},
+      admin_id = #{record.adminId,jdbcType=BIGINT},
+      schedul = #{record.schedul,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.goclass.pojo.Kebiao">
+    update kebiao
+    <set>
+      <if test="adminId != null">
+        admin_id = #{adminId,jdbcType=BIGINT},
+      </if>
+      <if test="schedul != null">
+        schedul = #{schedul,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where schedul_id = #{schedulId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.goclass.pojo.Kebiao">
+    update kebiao
+    set admin_id = #{adminId,jdbcType=BIGINT},
+      schedul = #{schedul,jdbcType=VARCHAR}
+    where schedul_id = #{schedulId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -52,10 +52,14 @@ struct StageFiveResultOfClassStrategy{
     2:list<map<i32,list<i32>>> adminclassList  //行政班数*{科目组合代码:学生集}    每个行政班包含的科目组合学生集
 	
     3:list<map<i32,list<i32>>> teachingclassList   //教学班*{科目组合代码:学生集}    每个教学班包含的科目组合学生集
+	
     4:list<list<i32>>   mixteachingclassList   //混合教学班数*所包含的教学班序号   每个混合教学班包含的教学班，教学班序号即teachingclass_list对应的索引
-    5:list<map<i32,i32>>  teachingclassIndexList  //教学班数*{科目代码:编号}      每个教学班对应的科目以及编号，通过科目：编号可确定教学班
-    6:list<list<i32>>  adminclassMixteachingclassList //行政班数*所包含的混合教学班数     每个行政班所包含的教学班,行政班的索引对应adminclass_list的索引,混合教学班的索引对应mixteachingclass_list
-    7:list<list<i32>>   mixteachingclassAdminclassesList  //混合教学班数*所对应的行政班数     每个混合教学班所影响到的行政班
+    
+	5:list<map<i32,i32>>  teachingclassIndexList  //教学班数*{科目代码:编号}      每个教学班对应的科目以及编号，通过科目：编号可确定教学班
+    
+	6:list<list<i32>>  adminclassMixteachingclassList //行政班数*所包含的混合教学班数     每个行政班所包含的教学班,行政班的索引对应adminclass_list的索引,混合教学班的索引对应mixteachingclass_list
+    
+	7:list<list<i32>>   mixteachingclassAdminclassesList  //混合教学班数*所对应的行政班数     每个混合教学班所影响到的行政班
 }
 
 struct ClassStrategyRule{
@@ -123,9 +127,12 @@ struct ClassScheduleRule{
     2:map<i32,i16>  subjectSubjectcount     //{科目代码：接次数} 每个科目每周的节次
     3:list<i16> onedaySession   //一天的节次 例子[0,1,2,3,4,5,6]    一天七节  
     4:list<map<i32,i16>> teacherList    //教师数*{科目代码：序号}   任课老师列表
+	
     5:list<i32> teachingclassTeacherList    //教学班数*任课老师索引 对应着各自的list：teachingclass_list、teacher_list.后面的索引自行对应
-    6:list<i32> classroomList   //教室集
-    7:list<i32> teachingclassClassroomList  //每个行政班对应的教室索引
+   
+
+   6:list<i32> classroomList   //教室集
+    7:list<i32> teachingclassClassroomList  //每个教学班对应的教室索引
     8:list<list<i32>>   positiveClassSchedule   //一个星期总节数*n  固排课表    把需要固排的“混合教学班索引”放到对应的节次
     9:list<list<i32>>   negativeClassSchedule   //一个星期总节数*n  禁排课表    把需要禁排的“混合教学班索引”放到对应的节次  不用上课的节次放入-1
     10:list<list<i32>>  connectClass    //连排条目数*连排单元 连排单元：  [星期几（0开始）,混合教学班索引,连排数]
@@ -145,7 +152,7 @@ struct StageOneResultOfClassSchedule{
 struct StageTwoResultOfClassSchedule{
     1:list<list<i32>>   sessionClassSchedule  //每周总节次数*混合教学班   在每节中要上课的混合教学班
     2:list<list<list<i32>>>   dayAdminclassClassSchedule  //天数*行政班数*混合教学班    每天，每个行政班，根据节次顺序要上的课。注意这里的混合教学班是有顺序的
-}
+}s
 
 struct ResultOfClassScheduleSimulateData{
     1:i32 statusCode    //0-正常 -1-出错

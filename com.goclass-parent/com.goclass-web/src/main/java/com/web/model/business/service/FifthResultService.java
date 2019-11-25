@@ -13,4 +13,8 @@ public interface FifthResultService {
      * @return
      */
     public Object findOne();
+    
+    public Object getKeBiao();
+    
+    public void setKeBiao(Object object);
 }

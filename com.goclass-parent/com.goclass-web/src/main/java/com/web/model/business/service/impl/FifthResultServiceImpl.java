@@ -53,4 +53,32 @@ public class FifthResultServiceImpl implements FifthResultService {
         System.out.println("获取成功");
         return object;
     }
+
+	@Override
+	public Object getKeBiao() {
+		TbFifthResult fiveResult = tbFifthResultMapper.selectByPrimaryKey(2L);
+        Object object = new Object();
+        byte[] bytes = fiveResult.getFiveresultDatavalue();
+        try{
+            object = BlobUtil.getObject(bytes);
+        }catch (Exception e){
+            System.out.println("序列化失败");
+        }
+        System.out.println("获取成功");
+        return object;
+	}
+
+	@Override
+	public void setKeBiao(Object object) {
+		TbFifthResult fiveResult = new TbFifthResult();
+        fiveResult.setFiveresultDatavalue(BlobUtil.setObject(object));
+        fiveResult.setFiveresultId(2L);
+        try {
+            tbFifthResultMapper.updateByPrimaryKeyWithBLOBs(fiveResult);
+            System.out.println("修改成功");
+        }catch(Exception e){
+            e.printStackTrace();
+            System.out.println("修改失败");
+        }
+	}
 }
